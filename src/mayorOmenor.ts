@@ -5,18 +5,20 @@ import  {red, blue, green,yellow} from "colors";
 import * as readlineSync from 'readline-sync';
 import { Pantalla } from "./pantalla";
 
-export class MayorOmenor extends Mazo{
+export class MayorOmenor{
     private titulo:string;
     private carta1:Cartas;
     private carta2:Cartas;
     private jugador:Jugador;
+    private mazo:Mazo;
 
     public constructor(pJugador:Jugador,pTitulo:string){
-        super([],[]);
+        this.mazo= new Mazo([],[])
         this.titulo=pTitulo;
         this.carta1= new Cartas("Instrucciones");
         this.carta2=new Cartas("Dorso");;
         this.jugador=pJugador;
+        
     }
 
     public getNombre():string{
@@ -44,14 +46,14 @@ export class MayorOmenor extends Mazo{
     private calcularPremio(pMayoroMenor:number):void{
         let carta1aux:number;
         let carta2aux:number;
-        this.carta2=this.darCarta();
+        this.carta2=this.mazo.darCarta();
         carta1aux=parseInt(this.carta1.getCartas().replace(/\D/g, ""));
         carta2aux=parseInt(this.carta2.getCartas().replace(/\D/g, ""));
         console.log(this.mostrarEnPantalla(this.carta2));
         if (carta2aux===undefined){
             console.log(`Usted ah perdido todo su dinero`); 
             this.jugador.setDinero(0);
-            this.carta2=this.darCarta();           
+            this.carta2=this.mazo.darCarta();           
         } else {
             if (pMayoroMenor===2){
                 if (carta1aux>carta2aux){
@@ -73,14 +75,35 @@ export class MayorOmenor extends Mazo{
         console.log(`Su dinero actual es de ${this.jugador.getDinero()}`);
     }
 
+    private probalidadMayor(): void {
+        const carta1aux=parseInt(this.carta1.getCartas().replace(/\D/g, ""));  // Se queda con el número de la carta
+        const casosPosibles = 55;                                              // número total de cartas en el mazo
+        const combinacionMayor = (13-carta1aux)*4;                             // número de cartas mayores a la carta 1
+        const combinacionMenor = (carta1aux-1)*4;                               // número de cartas menores a la carta 1
+        const probabilidadComodin= 4/55;                                         // probabilidades de comodin
+        
+        console.log(`La probabilidad de sacar una carta mayor es de ${combinacionMayor/casosPosibles*100}%`);
+        console.log(`La probabilidad de sacar una carta menor es de ${combinacionMenor/casosPosibles*100}%`);
+        console.log(`La probabilidad de sacar un comodin es de ${probabilidadComodin*100}%`);
+        
+        /*cartas posibles = 55
+          cartas iguales = 3
+          cartas comodin = 4
+          cartas mayores = (13 - numero) * 4
+          cartas menores = (numero - 1) * 4
+          probabilides = casos ganadoras / casos totales
+          */
+
+}
+
 
 
     public juego():void {
         let pantalla = new Pantalla([]);
         let strPantalla: string[] = new Array();
         let valor:number;
-        this.cargarMazo();
-        this.carta1=this.darCarta();
+        this.mazo.cargarMazo();
+        this.carta1=this.mazo.darCarta();
         do {
             strPantalla=[];
             console.clear();
@@ -94,7 +117,8 @@ export class MayorOmenor extends Mazo{
             strPantalla.push(`Si sale ${green("COMODIN")} pierde todo su dinero`);
             pantalla.setPantalla(strPantalla)
             pantalla.mostrarPantalla(this.titulo);
-            this.jugador.apostar();
+            this.jugador.apostar(pantalla);
+            this.probalidadMayor();
             valor = readlineSync.questionInt(`Ingrese 1 para mayor, 2 para menor: `.toUpperCase());
             if ((valor===1)||(valor===2)){
                 this.calcularPremio(valor);

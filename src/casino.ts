@@ -2,11 +2,14 @@ import { Jugador } from "./jugador";
 import { Pantalla } from "./pantalla";
 import * as readlineSync from 'readline-sync';
 
+
 export class Casino{
     private nombre:string;
-
+    
+    
     public constructor(){
         this.nombre="LA VIRULETA"
+        
     }
 
     public getNombre():string {

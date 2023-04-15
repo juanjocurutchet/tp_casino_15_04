@@ -58,7 +58,7 @@ export class Dados {
                         console.clear();
                         pantalla.bienvenido(this.nombre);
                         console.log(`Su dinero actual es de $${this.jugador.getDinero()}\n`);
-                        this.jugador.apostar();
+                        this.jugador.apostar(pantalla);
                         console.log(this.probPremioMayor())
                         this.tirarDados();
                         strDados=[];

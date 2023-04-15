@@ -1,15 +1,15 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.Mazo = void 0;
-var cartas_1 = require("./cartas");
-var Mazo = /** @class */ (function () {
-    function Mazo(pMazo, pDescarte) {
+const cartas_1 = require("./cartas");
+class Mazo {
+    constructor(pMazo, pDescarte) {
         this.mazo = pMazo;
         this.descarte = pDescarte;
     }
-    Mazo.prototype.cargarMazo = function () {
-        var palo;
-        for (var j = 0; j < 4; j++) {
+    cargarMazo() {
+        let palo;
+        for (let j = 0; j < 4; j++) {
             switch (j) {
                 case 0:
                     palo = " ♥  ";
@@ -27,31 +27,31 @@ var Mazo = /** @class */ (function () {
                     palo = "";
                     break;
             }
-            for (var i = 0; i < 14; i++) {
+            for (let i = 0; i < 14; i++) {
                 if (i < 13) {
-                    this.mazo.push(new cartas_1.Cartas("   ".concat(i + 1, " ").concat(palo)));
+                    this.mazo.push(new cartas_1.Cartas(`   ${i + 1} ${palo}`));
                 }
                 else {
-                    this.mazo.push(new cartas_1.Cartas("COMODIN ".concat(palo)));
+                    this.mazo.push(new cartas_1.Cartas(`COMODIN ${palo}`));
                 }
             }
         }
-    };
-    Mazo.prototype.setMazo = function (pMazo) {
+    }
+    setMazo(pMazo) {
         this.mazo = pMazo;
-    };
-    Mazo.prototype.getMazo = function () {
+    }
+    getMazo() {
         return this.mazo;
-    };
-    Mazo.prototype.getNombreCarta = function (indice) {
+    }
+    getNombreCarta(indice) {
         return this.mazo[indice].getCartas();
-    };
-    Mazo.prototype.getDescarte = function () {
+    }
+    getDescarte() {
         return this.descarte;
-    };
-    Mazo.prototype.darCarta = function () {
-        var indice;
-        var ultimaCarta;
+    }
+    darCarta() {
+        let indice;
+        let ultimaCarta;
         if (this.descarte.length > 45) {
             ultimaCarta = this.descarte[this.descarte.length - 1];
             this.descarte = [];
@@ -62,7 +62,6 @@ var Mazo = /** @class */ (function () {
         } while (this.descarte.includes(indice) === true);
         this.descarte.push(indice);
         return this.mazo[indice];
-    };
-    return Mazo;
-}());
+    }
+}
 exports.Mazo = Mazo;

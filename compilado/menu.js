@@ -1,15 +1,15 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.Menu = void 0;
-var dados_1 = require("./dados");
-var mayorOmenor_1 = require("./mayorOmenor");
-var tragamonedaCartas_1 = require("./tragamonedaCartas");
-var tragamonedaFrutas_1 = require("./tragamonedaFrutas");
-var Menu = /** @class */ (function () {
-    function Menu() {
+const dados_1 = require("./dados");
+const mayorOmenor_1 = require("./mayorOmenor");
+const tragamonedaCartas_1 = require("./tragamonedaCartas");
+const tragamonedaFrutas_1 = require("./tragamonedaFrutas");
+class Menu {
+    constructor() {
     }
-    Menu.prototype.fabrica = function (pIndice, pJugador) {
-        var juego;
+    fabrica(pIndice, pJugador) {
+        let juego;
         switch (pIndice) {
             case 1:
                 juego = new tragamonedaFrutas_1.TragamonedasFrutas(pJugador, "La fruta de la fortuna");
@@ -29,12 +29,11 @@ var Menu = /** @class */ (function () {
                 juego.jugar();
                 break;
             case 0:
-                console.log("Gracias por sumarte al cacino");
+                console.log("Gracias por sumarte al casino");
                 break;
             default:
-                console.log("No pertence a este cacino");
+                console.log("No pertence a este casino");
         }
-    };
-    return Menu;
-}());
+    }
+}
 exports.Menu = Menu;

@@ -1,25 +1,48 @@
 "use strict";
-exports.__esModule = true;
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.Pantalla = void 0;
-var readlineSync = require("readline-sync");
-var colors_1 = require("colors");
-var Pantalla = /** @class */ (function () {
-    function Pantalla(pPantalla) {
+const readlineSync = __importStar(require("readline-sync"));
+const colors_1 = require("colors");
+class Pantalla {
+    constructor(pPantalla) {
         this.pantalla = pPantalla;
     }
-    Pantalla.prototype.getPantalla = function () {
+    getPantalla() {
         return this.pantalla;
-    };
-    Pantalla.prototype.setPantalla = function (pPantalla) {
+    }
+    setPantalla(pPantalla) {
         this.pantalla = pPantalla;
-    };
-    Pantalla.prototype.bienvenido = function (pTitulo) {
-        console.log((0, colors_1.red)("BIENVENIDO A ".concat(pTitulo, "\n").toUpperCase()));
-        console.log((0, colors_1.green)("Que comience el juego\n".toUpperCase()));
-    };
-    Pantalla.prototype.mostrarPantalla = function (pTitulo) {
+    }
+    bienvenido(pTitulo) {
+        console.log((0, colors_1.red)(`BIENVENIDO A ${pTitulo}\n`.toUpperCase()));
+        console.log((0, colors_1.green)(`Que comience el juego\n`.toUpperCase()));
+    }
+    mostrarPantalla(pTitulo) {
         console.log("\n");
-        console.log((0, colors_1.yellow)("                  ".concat(pTitulo, "\n").toUpperCase()));
+        console.log((0, colors_1.yellow)(`                  ${pTitulo}\n`.toUpperCase()));
         console.log("\n");
         console.log((0, colors_1.blue)("======================================================="));
         console.log("\n");
@@ -29,41 +52,41 @@ var Pantalla = /** @class */ (function () {
         console.log("\n");
         switch (pTitulo) {
             case "La fruta de la fortuna":
-                for (var i = 0; i < 3; i++) {
-                    console.log((0, colors_1.blue)("Fila ".concat(i + 1, ".....")));
+                for (let i = 0; i < 3; i++) {
+                    console.log((0, colors_1.blue)(`Fila ${i + 1}.....`));
                     console.log((0, colors_1.blue)("------ -----// " + (0, colors_1.green)(this.pantalla[i]) + " // " + (0, colors_1.green)(this.pantalla[i + 3]) + " // " + (0, colors_1.green)(this.pantalla[i + 6]) + " // --------"));
                 }
                 break;
             case "Las cartas tienen magia":
-                for (var i = 0; i < 3; i++) {
-                    console.log((0, colors_1.blue)("Fila ".concat(i + 1, ".....")));
+                for (let i = 0; i < 3; i++) {
+                    console.log((0, colors_1.blue)(`Fila ${i + 1}.....`));
                     console.log((0, colors_1.blue)("------ -----// " + (0, colors_1.green)(this.pantalla[i]) + " // " + (0, colors_1.green)(this.pantalla[i + 3]) + " // " + (0, colors_1.green)(this.pantalla[i + 6]) + " // " + (0, colors_1.green)(this.pantalla[i + 9]) + " // --------"));
                 }
                 break;
             case "A las cartas, Mayor o Menor":
                 this.borrarConsola();
-                for (var i = 0; i < this.pantalla.length; i++) {
+                for (let i = 0; i < this.pantalla.length; i++) {
                     console.log(this.pantalla[i]);
                 }
                 break;
             case "Dados, dados y mas dados":
-                for (var i = 0; i < 5; i++) {
+                for (let i = 0; i < 5; i++) {
                     console.log(this.pantalla[i]);
                 }
                 break;
             default:
                 console.log("algo fallo");
         }
-        console.log((0, colors_1.blue)("\nCALCULANDO PREMIOS.....\n"));
-    };
-    Pantalla.prototype.menuPantalla = function () {
+        console.log((0, colors_1.blue)(`\nCALCULANDO PREMIOS.....\n`));
+    }
+    menuPantalla() {
         console.clear();
         console.log((0, colors_1.blue)("====================================="));
-        console.log((0, colors_1.red)("||                                 ||"));
-        console.log((0, colors_1.red)("||   BIENVENIDO A NUESTRO CASINO   ||"));
-        console.log((0, colors_1.red)("||                                 ||"));
-        console.log((0, colors_1.red)("||   ESTOS  SON NUESTROS JUEGOS    ||"));
-        console.log((0, colors_1.red)("||                                 ||"));
+        console.log((0, colors_1.red)(`||                                 ||`));
+        console.log((0, colors_1.red)(`||   BIENVENIDO A NUESTRO CASINO   ||`));
+        console.log((0, colors_1.red)(`||                                 ||`));
+        console.log((0, colors_1.red)(`||   ESTOS  SON NUESTROS JUEGOS    ||`));
+        console.log((0, colors_1.red)(`||                                 ||`));
         console.log((0, colors_1.blue)("====================================="));
         console.log((0, colors_1.green)("||                                 ||"));
         console.log((0, colors_1.green)("||   1 - Tragamonedas de frutas    ||"));
@@ -75,8 +98,8 @@ var Pantalla = /** @class */ (function () {
         console.log((0, colors_1.green)("||   0 - Salir                     ||"));
         console.log((0, colors_1.blue)("=====================================\n"));
         return readlineSync.questionInt("Ingrese una opcion del menu: ".toUpperCase());
-    };
-    Pantalla.prototype.mensajesError = function (indice) {
+    }
+    mensajesError(indice) {
         switch (indice) {
             case 1:
                 console.log("Debe ingresar opciones del menu".toUpperCase());
@@ -86,44 +109,44 @@ var Pantalla = /** @class */ (function () {
             default:
                 break;
         }
-    };
-    Pantalla.prototype.comprobacionDatoIngresado = function (pMax, pMin, situacion) {
-        var condicion = false;
+    }
+    comprobacionDatoIngresado(pMax, pMin, situacion, pJugadoor) {
+        let condicion = false;
         switch (situacion) {
             case 1:
-                var valor = readlineSync.questionInt("Ingrese un juego".toUpperCase());
-                if ((valor < pMin) && (valor > pMin)) {
-                    console.log((0, colors_1.green)("No puede ingresar ".concat((0, colors_1.red)("".concat(valor)), ", no es una opci\u00F3n del ").concat((0, colors_1.red)("menu")).toUpperCase()));
+                const valor = readlineSync.questionInt(`Ingrese un juego`.toUpperCase());
+                if ((valor < pMin) && (valor > pMax)) {
+                    console.log((0, colors_1.green)(`No puede ingresar ${(0, colors_1.red)(`${valor}`)}, no es una opción del ${(0, colors_1.red)(`menu`)}`.toUpperCase()));
                 }
                 else {
                     condicion = true;
                 }
                 break;
             default:
-                var valor1 = readlineSync.questionInt("Ingrese su apuesta: ".toUpperCase());
+                const valor1 = readlineSync.questionInt("Ingrese su apuesta: ".toUpperCase());
                 if (valor1 < pMin) {
-                    console.log((0, colors_1.green)("No puede apostar ".concat((0, colors_1.red)("".concat(valor1)), ", no se puede apostar en ").concat((0, colors_1.red)("negativo")).toUpperCase()));
+                    console.log((0, colors_1.green)(`No puede apostar ${(0, colors_1.red)(`${valor1}`)}, no se puede apostar en ${(0, colors_1.red)(`negativo`)}`.toUpperCase()));
                 }
                 else {
-                    if (valor1 > pMin) {
-                        console.log((0, colors_1.green)("No puede apostar ".concat((0, colors_1.red)("".concat(valor1)), ", no puede apostar mas de lo que tiene").toUpperCase()));
+                    if (valor1 > pMax) {
+                        console.log((0, colors_1.green)(`No puede apostar ${(0, colors_1.red)(`${valor1}`)}, no puede apostar mas de lo que tiene`.toUpperCase()));
                     }
                     else {
                         condicion = true;
+                        pJugadoor.setApuesta(valor1);
                     }
                 }
                 break;
         }
         return condicion;
-    };
-    Pantalla.prototype.borrarConsola = function () {
+    }
+    borrarConsola() {
         console.clear();
-    };
-    Pantalla.prototype.pausaConsola = function () {
+    }
+    pausaConsola() {
         readlineSync.question("Presiona " + (0, colors_1.green)("Enter") + " para continuar...");
-    };
-    Pantalla.prototype.juegoPantalla = function () {
-    };
-    return Pantalla;
-}());
+    }
+    juegoPantalla() {
+    }
+}
 exports.Pantalla = Pantalla;

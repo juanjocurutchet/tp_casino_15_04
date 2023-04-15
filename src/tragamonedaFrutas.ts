@@ -112,7 +112,7 @@ export class TragamonedasFrutas extends Tragamonedas {
             this.pantalla.bienvenido(this.getNombreTragamonedas());
             console.log(`Su dinero actual es de $${this.jugador.getDinero()}\n`);
             if (this.jugador.getDinero()>0){
-                this.jugador.apostar();
+                this.jugador.apostar(this.pantalla);
                 this.setTirada();
                 this.pantalla.borrarConsola();
                 this.pantalla.setPantalla(this.mostrarEnPantalla());

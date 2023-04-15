@@ -1,5 +1,6 @@
 import * as readlineSync from 'readline-sync';
 import  {red, blue, green,yellow} from "colors";
+import { Jugador } from './jugador';
 export class Pantalla {
     private pantalla:string[];
 
@@ -66,7 +67,7 @@ export class Pantalla {
     }
 
     public menuPantalla():number{
-        console.clear();
+        console.clear();        
         console.log(blue ("====================================="));
         console.log( red (`||                                 ||`));
         console.log( red (`||   BIENVENIDO A NUESTRO CASINO   ||`));
@@ -100,13 +101,13 @@ export class Pantalla {
         }
     }
 
-    public comprobacionDatoIngresado(pMax:number, pMin:number, situacion:number):boolean{
+    public comprobacionDatoIngresado(pMax:number, pMin:number, situacion:number, pJugadoor:Jugador):boolean{
         let condicion:boolean = false;
         
         switch(situacion) {
             case 1:
                 const valor = readlineSync.questionInt(`Ingrese un juego`.toUpperCase());
-                if ((valor<pMin)&& (valor>pMin)){
+                if ((valor<pMin)&& (valor>pMax)){
                     console.log(green(`No puede ingresar ${red(`${valor}`)}, no es una opción del ${red(`menu`)}`.toUpperCase())); 
                 } else {
                     condicion = true;
@@ -117,10 +118,11 @@ export class Pantalla {
                 if (valor1<pMin){
                     console.log(green(`No puede apostar ${red(`${valor1}`)}, no se puede apostar en ${red(`negativo`)}`.toUpperCase())); 
                 } else { 
-                    if (valor1>pMin){
+                    if (valor1>pMax){
                         console.log(green(`No puede apostar ${red(`${valor1}`)}, no puede apostar mas de lo que tiene`.toUpperCase())); 
                     } else {
                         condicion = true;
+                        pJugadoor.setApuesta(valor1);
                     }
                 } 
                 break;

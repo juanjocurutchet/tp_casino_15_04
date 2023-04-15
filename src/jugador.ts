@@ -30,6 +30,10 @@ export class Jugador {
         return this.apuesta;
     }
 
+    public setApuesta(pApuesta:number):void {
+        this.apuesta=pApuesta;
+    }
+
     public setDinero(pDinero:number):void{
         this.dinero=pDinero;
     }
@@ -37,11 +41,13 @@ export class Jugador {
  
     
 
-    public apostar():void {
-        let apuestaLocal:number;
+    public apostar(pPantalla:Pantalla):void {
+
         do {
+
+            
     
-            apuestaLocal = readlineSync.questionInt("Ingrese su apuesta: ".toUpperCase());
+           /* apuestaLocal = readlineSync.questionInt("Ingrese su apuesta: ".toUpperCase());
         
         
             if(apuestaLocal<=0){ 
@@ -61,18 +67,19 @@ export class Jugador {
                 } else {
                     console.log("Saldo insuficiente para esta apuesta".toUpperCase());
                 }
+
+                (apuestaLocal<=0)||(apuestaLocal>this.dinero)
             }*/
             
         
-        } while ((apuestaLocal<=0)||(apuestaLocal>this.dinero));
+        } while (pPantalla.comprobacionDatoIngresado(this.dinero,0,2,this)===false);
 
-        this.dinero=this.dinero-apuestaLocal;
-                this.apuesta=apuestaLocal;
+        this.dinero=this.dinero-this.apuesta;
     }
 
     public agregarSaldo():void{
         let valor:number;
-        
+        console.log("\n")
         if (readlineSync.keyInYN("¿Desea comprar mas fichas? ")){
             valor = readlineSync.questionInt("Ingrese la cantidad de fichas que quiere comprar: ".toUpperCase());
             if (valor >= 0){

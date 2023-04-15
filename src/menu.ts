@@ -30,10 +30,10 @@ export class Menu {
             juego.jugar();
             break;
         case 0:
-            console.log("Gracias por sumarte al cacino");
+            console.log("Gracias por sumarte al casino");
             break;
         default:
-            console.log("No pertence a este cacino");
+            console.log("No pertence a este casino");
         }
         
 

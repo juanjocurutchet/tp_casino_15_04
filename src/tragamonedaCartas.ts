@@ -3,77 +3,77 @@ import { Jugador } from "./jugador";
 import { Mazo } from "./mazo";
 import { Tragamonedas } from "./tragamoneda";
 import * as readlineSync from 'readline-sync';
-import  {red, blue, green,yellow} from "colors";
+import { red, blue, green, yellow } from "colors";
 
 export class TragamonedasCartas extends Tragamonedas {
     private guia: Mazo[];
     private tirada: number[];
-    private mazo:Mazo;
+    private mazo: Mazo;
 
-    public constructor (pJugador:Jugador,pNombre:String){
-        super(pJugador,pNombre);
-        this.guia= new Array ();
-        this.tirada= new Array();
-        this.mazo = new Mazo([],[]);
+    public constructor(pJugador: Jugador, pNombre: String) {
+        super(pJugador, pNombre);
+        this.guia = new Array();
+        this.tirada = new Array();
+        this.mazo = new Mazo([], []);
     }
-    private cargarGuia():void{
-        let auxCartas:Cartas[];
-        let auxMazo:Mazo;
+    private cargarGuia(): void {
+        let auxCartas: Cartas[];
+        let auxMazo: Mazo;
         this.mazo.cargarMazo();
-        let palo:string;
-        for (let j:number=0;j<4;j++){
-            switch (j){
+        let palo: string;
+        for (let j: number = 0; j < 4; j++) {
+            switch (j) {
                 case 0:
-                    palo=" ♥  ";
+                    palo = " ♥  ";
                     break;
-               case 1:
-                    palo=" ♠  ";
+                case 1:
+                    palo = " ♠  ";
                     break;
-               case 2:
-                    palo=" ♦  "
+                case 2:
+                    palo = " ♦  "
                     break;
-               case 3: 
-                    palo=" ♣  "
+                case 3:
+                    palo = " ♣  "
                     break;
-               default :
-                    palo=""
+                default:
+                    palo = ""
                     break;
-           }
-            auxCartas=this.mazo.getMazo().filter(e=> e.deQuePaloEs(palo) === true );
-            auxMazo = new Mazo(auxCartas,[]);
+            }
+            auxCartas = this.mazo.getMazo().filter(e => e.deQuePaloEs(palo) === true);
+            auxMazo = new Mazo(auxCartas, []);
             this.guia.push(auxMazo);
         }
     }
 
-    private setTirada():void {
-        this.tirada=[];
-        let aux:number[];
+    private setTirada(): void {
+        this.tirada = [];
+        let aux: number[];
         aux = new Array();
-        let indice : number;
-        for (let i:number=0; i<4; i++){
-            for (let j:number=0; j<3; j++) {
-                indice = Math.floor(Math.random()*14);                  
-                if (aux.includes(indice)){
-                    j = j-1;
+        let indice: number;
+        for (let i: number = 0; i < 4; i++) {
+            for (let j: number = 0; j < 3; j++) {
+                indice = Math.floor(Math.random() * 14);
+                if (aux.includes(indice)) {
+                    j = j - 1;
                 } else {
                     aux.push(indice);
                 }
             }
-            this.tirada.push.apply(this.tirada,aux);
-            aux=[];
+            this.tirada.push.apply(this.tirada, aux);
+            aux = [];
         }
 
     }
 
-    private mostrarEnPantalla():string[]{
-        let aux:string[] = new Array;
-        let auxMazo:Cartas[] = new Array;
-        let k:number=0;
-        for (let i:number=0;i<4;i++){        
-            auxMazo=this.guia[i].getMazo();            
-            for (let j:number=0;j<3;j++){
+    private mostrarEnPantalla(): string[] {
+        let aux: string[] = new Array;
+        let auxMazo: Cartas[] = new Array;
+        let k: number = 0;
+        for (let i: number = 0; i < 4; i++) {
+            auxMazo = this.guia[i].getMazo();
+            for (let j: number = 0; j < 3; j++) {
                 aux.push(`${auxMazo[this.tirada[k]].getCartas()}`);
-                k=k+1;
+                k = k + 1;
             }
         }
         return aux;
@@ -112,7 +112,7 @@ export class TragamonedasCartas extends Tragamonedas {
 
         return premio;
     }
-
+    
 
     juego(): void {
         do {
@@ -120,14 +120,20 @@ export class TragamonedasCartas extends Tragamonedas {
             this.pantalla.borrarConsola();
             this.pantalla.bienvenido(this.getNombreTragamonedas());
             console.log(`Su dinero actual es de $${this.jugador.getDinero()}\n`);
-            this.jugador.apostar();
+            this.jugador.apostar(this.pantalla);
             this.setTirada();
             this.pantalla.borrarConsola();
             this.pantalla.setPantalla(this.mostrarEnPantalla());
-            this.pantalla.mostrarPantalla(this.getNombreTragamonedas());
+            this.pantalla.mostrarPantalla(this.getNombreTragamonedas());            
             console.log(this.calcularPremio());
             console.log("\n");
-        } while ((this.jugador.getDinero()>0)&&(readlineSync.keyInYN("¿Desea jugar de nuevo? ")));
-    }
-
+        } while((this.jugador.getDinero() > 0) && (readlineSync.keyInYN("¿Desea jugar de nuevo? ")));
+        }
 }
+
+
+
+    
+
+
+
