@@ -88,7 +88,7 @@ export class Dados {
                 const lados = 6; // número de lados en cada dado
                 const combinacionesPosibles = Math.pow(lados, 5); // número total de combinaciones posibles
                 const combinacionesCincoIguales = lados; // solo hay una combinación posible para obtener cinco dados iguales
-                const probabilidad = combinacionesCincoIguales / combinacionesPosibles; // calcular la probabilidad
+                const probabilidad = (combinacionesCincoIguales / combinacionesPosibles)*100; // calcular la probabilidad
 
                 return blue(`Su probabilidad de obtener el premio mayor es de ${red(`${probabilidad}`)}`);
 
